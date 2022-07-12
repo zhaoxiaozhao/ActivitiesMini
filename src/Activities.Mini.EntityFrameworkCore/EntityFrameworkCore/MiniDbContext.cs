@@ -12,6 +12,7 @@ using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.TenantManagement;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
+using Activities.Mini.WxActivity;
 
 namespace Activities.Mini.EntityFrameworkCore;
 
@@ -50,6 +51,11 @@ public class MiniDbContext :
     public DbSet<Tenant> Tenants { get; set; }
     public DbSet<TenantConnectionString> TenantConnectionStrings { get; set; }
 
+    //Activity
+    public DbSet<Activity> Activities { get; set; }
+    public DbSet<WxUser> WxUsers { get; set; }
+
+
     #endregion
 
     public MiniDbContext(DbContextOptions<MiniDbContext> options)
@@ -74,12 +80,6 @@ public class MiniDbContext :
         builder.ConfigureTenantManagement();
 
         /* Configure your own tables/entities inside here */
-
-        //builder.Entity<YourEntity>(b =>
-        //{
-        //    b.ToTable(MiniConsts.DbTablePrefix + "YourEntities", MiniConsts.DbSchema);
-        //    b.ConfigureByConvention(); //auto configure for the base class props
-        //    //...
-        //});
+        builder.ConfigureActivityManagement();
     }
 }

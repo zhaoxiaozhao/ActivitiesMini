@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Volo.Abp.Domain.Entities;
 
-namespace Activities.Mini.Activity;
+namespace Activities.Mini.WxActivity;
 
 public class Activity: AggregateRoot<long>
 {
@@ -13,21 +13,18 @@ public class Activity: AggregateRoot<long>
     public DateTime? EndTime { get; protected set; }
     public long Creator { get; protected set; }
     public string Address { get; protected set; }
-    public List<Attender> Attenders { get; protected set; }
-
+    public List<ActivityUser> ActivityUsers { get; protected set; }
     protected Activity() { }
     public Activity(string subject, string conent)
     {
         Subject = subject;
         Content = conent;
-        Attenders = new List<Attender>();
+        ActivityUsers = new List<ActivityUser>();
     }
     public void SetStartTime(DateTime? start) { StartTime = start; }
     public void SetEndTime(DateTime? end) { EndTime = end; }
-    public void AddAttender(long attenderId)
+    public void AddWxUser(long wxUserId, long activityId)
     {
-        if (attenderId == 0) return;
-
-        Attenders.Add(new Attender(attenderId));
+        ActivityUsers.Add(new ActivityUser(wxUserId, activityId));
     }
 }
