@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp.Domain.Entities;
 
-namespace Activities.Mini.WxActivity;
+namespace Activities.Mini.WxActivities;
 
 public class ActivityUser : Entity
 {
