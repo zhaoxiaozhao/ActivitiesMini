@@ -18,9 +18,13 @@ namespace Activities.Mini.WxActivities
             CreateUpdateActivityDto>,
         IActivityService
     {
-        public ActivityService(IRepository<Activity, long> repository) : base(repository)
-        {
+        private readonly IActivityUserRepository _activityUserRepository;
 
+        public ActivityService(
+            IRepository<Activity, long> repository, 
+            IActivityUserRepository activityUserRepository) : base(repository)
+        {
+            _activityUserRepository = activityUserRepository;
         }
     }
 }

@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Activities.Mini.Core\Activities.Mini.Core.csproj" />
     <ProjectReference Include="..\Activities.Mini.Domain\Activities.Mini.Domain.csproj" />
     <ProjectReference Include="..\Activities.Mini.Application.Contracts\Activities.Mini.Application.Contracts.csproj" />
   </ItemGroup>

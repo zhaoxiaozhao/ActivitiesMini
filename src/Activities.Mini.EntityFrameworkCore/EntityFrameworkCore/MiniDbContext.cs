@@ -12,7 +12,7 @@ using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.TenantManagement;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
-using Activities.Mini.WxActivity;
+using Activities.Mini.WxActivities;
 
 namespace Activities.Mini.EntityFrameworkCore;
 

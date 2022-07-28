@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp;
-using Activities.Mini.WxActivity;
+using Activities.Mini.WxActivities;
 using Volo.Abp.EntityFrameworkCore.Modeling;
 
 namespace Activities.Mini.EntityFrameworkCore;
