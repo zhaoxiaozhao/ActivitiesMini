@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <Import Project="..\..\common.props" />
 
@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Activities.Mini.Common\Activities.Mini.Common.csproj" />
     <ProjectReference Include="..\Activities.Mini.Core\Activities.Mini.Core.csproj" />
     <ProjectReference Include="..\Activities.Mini.Domain\Activities.Mini.Domain.csproj" />
     <ProjectReference Include="..\Activities.Mini.Application.Contracts\Activities.Mini.Application.Contracts.csproj" />
@@ -15,6 +16,7 @@
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Account.Application" Version="5.3.2" />
+    <PackageReference Include="Volo.Abp.BlobStoring" Version="5.3.2" />
     <PackageReference Include="Volo.Abp.Identity.Application" Version="5.3.2" />
     <PackageReference Include="Volo.Abp.PermissionManagement.Application" Version="5.3.2" />
     <PackageReference Include="Volo.Abp.TenantManagement.Application" Version="5.3.2" />
