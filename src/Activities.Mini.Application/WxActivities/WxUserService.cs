@@ -7,6 +7,7 @@ using Activities.Mini.Core.Extensions;
 using Volo.Abp.Caching;
 using Volo.Abp.BlobStoring;
 using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Configuration;
 
 namespace Activities.Mini.WxActivities
 {
@@ -14,25 +15,26 @@ namespace Activities.Mini.WxActivities
     {
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly IWxUserRepository _wxUserRepository;
+        private readonly IConfiguration _configuration;
         private readonly IDistributedCache<SessionUser> _cache;
 
         public WxUserService(
             IHttpClientFactory httpClientFactory,
             IWxUserRepository wxUserRepository,
             IDistributedCache<SessionUser> cache,
-            IBlobContainer blobContainer
-            )
+            IConfiguration configuration)
         {
             _httpClientFactory = httpClientFactory;
             _wxUserRepository = wxUserRepository;
             _cache = cache;
+            _configuration = configuration;
         }
 
         public async Task<LoginResultDto> LoginAsync(WxUserLoginDto dto)
         {
             var client = _httpClientFactory.CreateClient();
-            var appId = "wx5d3c5102b7faae1d";
-            var secret = "3ad58c5b0776b02e7447625d82be92c8";
+            var appId = _configuration["MiniProgram:AppId"];
+            var secret = _configuration["MiniProgram:Secret"];
             var url = $"https://api.weixin.qq.com/sns/jscode2session?appid={appId}&secret={secret}&js_code={dto.Code}&grant_type=authorization_code";
             var result = await client.GetAsync<LoginResultDto>(url);      
             

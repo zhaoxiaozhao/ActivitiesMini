@@ -10,16 +10,20 @@ using Volo.Abp.BlobStoring;
 using Activities.Mini.Common;
 using System.IO;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
 namespace Activities.Mini.File
 {
     public class FileService : MiniAppService, IFileService
     {
         private readonly IBlobContainer _blobContainer;
+        private readonly IConfiguration _configuration;
 
-        public FileService(IBlobContainer blobContainer)
+        public FileService(IBlobContainer blobContainer,
+            IConfiguration configuration)
         {
             _blobContainer = blobContainer;
+            _configuration = configuration;
         }
 
         public async Task<IApiResult> UploadAsync(IFormFile file)
