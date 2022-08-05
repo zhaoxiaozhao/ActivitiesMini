@@ -6,8 +6,9 @@ EXPOSE 80
 EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+WORKDIR /app
+COPY ["NuGet.Config", .]
 WORKDIR /src
-COPY ["../NuGet.Config", .]
 COPY ["src/Activities.Mini.HttpApi.Host/Activities.Mini.HttpApi.Host.csproj", "src/Activities.Mini.HttpApi.Host/"]
 COPY ["src/Activities.Mini.EntityFrameworkCore/Activities.Mini.EntityFrameworkCore.csproj", "src/Activities.Mini.EntityFrameworkCore/"]
 COPY ["src/Activities.Mini.Domain/Activities.Mini.Domain.csproj", "src/Activities.Mini.Domain/"]
