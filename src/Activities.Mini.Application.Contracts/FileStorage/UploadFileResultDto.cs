@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Activities.Mini.Common;
 
-namespace Activities.Mini.File
+namespace Activities.Mini.FileStorage
 {
     public class UploadFileResultDto
     {

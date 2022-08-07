@@ -6,12 +6,12 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Activities.Mini.File
+namespace Activities.Mini.FileStorage
 {
     public interface IFileService
     {
         public Task<IApiResult> UploadAsync(IFormFile file);
 
-        public Task<IApiResult> DownloadAsync(string fileName);
+        public Task<FileContentResult> DownloadAsync(string fileName);
     }
 }

@@ -7,6 +7,7 @@ using Volo.Abp.PermissionManagement;
 using Volo.Abp.SettingManagement;
 using Volo.Abp.TenantManagement;
 using Volo.Abp.BlobStoring;
+using Volo.Abp.BlobStoring.FileSystem;
 
 namespace Activities.Mini;
 
@@ -18,16 +19,28 @@ namespace Activities.Mini;
     typeof(AbpPermissionManagementApplicationModule),
     typeof(AbpTenantManagementApplicationModule),
     typeof(AbpFeatureManagementApplicationModule),
-    typeof(AbpSettingManagementApplicationModule)
+    typeof(AbpSettingManagementApplicationModule),
+    typeof(AbpBlobStoringModule),
+    typeof(AbpBlobStoringFileSystemModule)
     )]
-[DependsOn(typeof(AbpBlobStoringModule))]
-    public class MiniApplicationModule : AbpModule
+public class MiniApplicationModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
         Configure<AbpAutoMapperOptions>(options =>
         {
             options.AddMaps<MiniApplicationModule>();
+        });
+
+        Configure<AbpBlobStoringOptions>(options =>
+        {
+            options.Containers.Configure("profile-pictures", container =>
+            {
+                container.UseFileSystem(fileSystem =>
+                {
+                    fileSystem.BasePath = "D:\\my-files";
+                });
+            });
         });
     }
 }
