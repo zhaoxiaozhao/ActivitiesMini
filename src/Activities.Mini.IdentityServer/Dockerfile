@@ -7,7 +7,6 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["NuGet.Config", "."]
 COPY ["src/Activities.Mini.IdentityServer/Activities.Mini.IdentityServer.csproj", "src/Activities.Mini.IdentityServer/"]
 COPY ["src/Activities.Mini.EntityFrameworkCore/Activities.Mini.EntityFrameworkCore.csproj", "src/Activities.Mini.EntityFrameworkCore/"]
 COPY ["src/Activities.Mini.Domain/Activities.Mini.Domain.csproj", "src/Activities.Mini.Domain/"]
