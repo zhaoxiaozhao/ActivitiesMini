@@ -17,7 +17,7 @@
 
     public interface IApiResult<T> : IApiResult
     {
-        T Result
+        T Data
         {
             get;
             set;
@@ -26,7 +26,7 @@
 
     public class ApiResult<TResult> : ApiResult, IApiResult<TResult>, IApiResult
     {
-        public TResult Result
+        public TResult Data
         {
             get;
             set;
@@ -36,11 +36,11 @@
         {
         }
 
-        public ApiResult(TResult result, int? statusCode, string message = "")
+        public ApiResult(TResult data, int? statusCode, string message = "")
         {
             base.StatusCode = statusCode.GetValueOrDefault();
             base.Message = (string.IsNullOrEmpty(message) ? "请求成功" : message);
-            Result = result;
+            Data = data;
         }
     }
 
@@ -68,7 +68,7 @@
         {
             return new ApiResult<TResult>
             {
-                Result = result,
+                Data = result,
                 Message = message
             };
         }
@@ -96,7 +96,7 @@
             {
                 StatusCode = statusCode.GetValueOrDefault(),
                 Message = message ?? string.Empty,
-                Result = errorResult
+                Data = errorResult
             };
         }
 
@@ -115,7 +115,7 @@
             {
                 StatusCode = statusCode,
                 Message = message,
-                Result = result
+                Data = result
             };
         }
 
@@ -134,7 +134,7 @@
             {
                 StatusCode = serviceResult.StatusCode,
                 Message = serviceResult.Message ?? string.Empty,
-                Result = serviceResult.Result
+                Data = serviceResult.Result
             };
         }
     }

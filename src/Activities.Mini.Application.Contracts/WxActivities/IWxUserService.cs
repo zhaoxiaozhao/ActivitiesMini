@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Activities.Mini.Common;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,6 +12,6 @@ namespace Activities.Mini.WxActivities
     {
         public Task<RegisterResultDto> RegisterAsync(WxUserRegisterDto dto);
 
-        public Task<LoginResultDto> LoginAsync(WxUserLoginDto dto);
+        public Task<IApiResult> LoginAsync(WxUserLoginDto dto);
     }
 }
