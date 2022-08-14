@@ -9,5 +9,6 @@ namespace Activities.Mini.WxActivities
 {
     public interface IWxUserRepository: IRepository<WxUser, long>
     {
+        public Task<WxUser> FindByOpenIdAsync(string openId);
     }
 }

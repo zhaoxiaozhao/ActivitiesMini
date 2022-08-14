@@ -48,7 +48,7 @@
     {
         public static readonly IApiResult Empty = new ApiResult
         {
-            StatusCode = 200,
+            StatusCode = 0,
             Message = "请求成功"
         };
 

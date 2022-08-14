@@ -8,6 +8,7 @@ using Volo.Abp.SettingManagement;
 using Volo.Abp.TenantManagement;
 using Volo.Abp.BlobStoring;
 using Volo.Abp.BlobStoring.FileSystem;
+using Volo.Abp.Caching;
 
 namespace Activities.Mini;
 
@@ -30,6 +31,11 @@ public class MiniApplicationModule : AbpModule
         Configure<AbpAutoMapperOptions>(options =>
         {
             options.AddMaps<MiniApplicationModule>();
+        });
+
+        Configure<AbpDistributedCacheOptions>(options =>
+        {
+            options.KeyPrefix = "activity_";
         });
 
         Configure<AbpBlobStoringOptions>(options =>

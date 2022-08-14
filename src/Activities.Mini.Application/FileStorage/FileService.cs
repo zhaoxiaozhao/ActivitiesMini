@@ -26,6 +26,7 @@ namespace Activities.Mini.FileStorage
             _configuration = configuration;
         }
 
+        [HttpPost]
         public async Task<IApiResult> UploadAsync(IFormFile file)
         {
             try
@@ -44,6 +45,7 @@ namespace Activities.Mini.FileStorage
             }
         }
 
+        [HttpGet]
         public async Task<FileContentResult> DownloadAsync(string fileName)
         {
             var bytes = await _blobContainer.GetAllBytesOrNullAsync(fileName);
