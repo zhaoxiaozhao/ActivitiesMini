@@ -7,7 +7,7 @@ using Volo.Abp.Domain.Repositories;
 
 namespace Activities.Mini.WxActivities
 {
-    public interface IActivityUserRepository : IRepository<Activity, long>
+    public interface IActivityUserRepository : IRepository<ActivityUser, long>
     {
 
     }

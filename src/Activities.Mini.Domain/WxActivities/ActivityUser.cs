@@ -7,9 +7,8 @@ using Volo.Abp.Domain.Entities;
 
 namespace Activities.Mini.WxActivities;
 
-public class ActivityUser : Entity
+public class ActivityUser : Entity<long>
 {
-    public long Id { get; set; }
     public long WxUserId { get; set; }
     public long ActivityId { get; set; }
     public DateTime AttendTime { get; protected set; }

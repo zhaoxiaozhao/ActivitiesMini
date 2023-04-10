@@ -13,7 +13,8 @@ public class Activity: AggregateRoot<long>
     public DateTime EndTime { get; protected set; }
     public long Creator { get; protected set; }
     public string Address { get; protected set; }
-    public List<ActivityUser> ActivityUsers { get; protected set; }
+    public List<ActivityUser> ActivityUsers { get; set; }
+    public List<ActivityAppendix> ActivityAppendices { get; set; }
     protected Activity() { }
     public Activity(string subject, string conent)
     {

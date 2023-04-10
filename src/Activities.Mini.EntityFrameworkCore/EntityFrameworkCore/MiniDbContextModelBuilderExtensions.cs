@@ -58,6 +58,20 @@ public static class MiniDbContextModelBuilderExtensions
 
         });
 
+        builder.Entity<ActivityAppendix>(b =>
+        {
+            b.ToTable(MiniConsts.DbTablePrefix + "ActivityAppendix", MiniConsts.DbSchema);
+
+            b.ConfigureByConvention();
+
+            b.Property(x => x.ActivityId).HasColumnName(nameof(ActivityAppendix.ActivityId));
+
+            b.HasIndex(x => new { x.ActivityId });
+
+            b.ApplyObjectExtensionMappings();
+
+        });
+
         builder.Entity<WxUser>(b => 
         {
             b.ToTable(MiniConsts.DbTablePrefix + "User", MiniConsts.DbSchema);

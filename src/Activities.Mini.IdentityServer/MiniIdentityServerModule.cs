@@ -101,7 +101,7 @@ public class MiniIdentityServerModule : AbpModule
         {
             Configure<AbpVirtualFileSystemOptions>(options =>
             {
-                    options.FileSets.ReplaceEmbeddedByPhysical<MiniDomainSharedModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}Activities.Mini.Domain.Shared"));
+                options.FileSets.ReplaceEmbeddedByPhysical<MiniDomainSharedModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}Activities.Mini.Domain.Shared"));
                 options.FileSets.ReplaceEmbeddedByPhysical<MiniDomainModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}Activities.Mini.Domain"));
             });
         }

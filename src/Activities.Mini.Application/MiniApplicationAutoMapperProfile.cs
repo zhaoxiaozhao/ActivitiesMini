@@ -13,5 +13,11 @@ public class MiniApplicationAutoMapperProfile : Profile
 
         CreateMap<WxUser, WxUserRegisterDto>();
         CreateMap<WxUserRegisterDto, WxUser>();
+        CreateMap<Activity, CreateUpdateActivityDto>();
+        CreateMap<CreateUpdateActivityDto, Activity>();
+        CreateMap<ActivityUserDto, ActivityUser>();
+        CreateMap<ActivityUser, ActivityUserDto>();
+        CreateMap<ActivityAppendix, ActivityAppendixDto>();
+        CreateMap<ActivityAppendixDto, ActivityAppendix>();
     }
 }
