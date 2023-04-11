@@ -53,6 +53,7 @@ public class MiniDbContext :
 
     //Activity
     public DbSet<Activity> Activities { get; set; }
+    public DbSet<ActivityAppendix> ActivityAppendices { get; set; }
     public DbSet<WxUser> WxUsers { get; set; }
 
 
