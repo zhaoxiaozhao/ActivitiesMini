@@ -4,12 +4,14 @@ using Volo.Abp.Application.Services;
 
 namespace Activities.Mini.WxActivities
 {
-    public interface IWxUserService: IApplicationService
+    public interface IWxUserService : IApplicationService
     {
-        public Task<IApiResult> RegisterAsync(WxUserRegisterDto dto);
+        Task<IApiResult> RegisterAsync(WxUserRegisterDto dto);
 
-        public Task<IApiResult> LoginAsync(WxUserLoginDto dto);
+        Task<IApiResult> LoginAsync(WxUserLoginDto dto);
 
-        public Task<IApiResult> DeleteAsync(string openId);
+        Task<IApiResult> DeleteAsync(string openId);
+
+        Task<IApiResult> GetUserPhoneAsync(string code);
     }
 }

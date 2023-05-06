@@ -13,6 +13,12 @@ using Microsoft.AspNetCore.Http;
 using Volo.Abp.ObjectMapping;
 using Microsoft.AspNetCore.Mvc;
 using Volo.Abp.Domain.Repositories;
+using Microsoft.AspNetCore.Identity;
+using System.Reflection;
+using Volo.Abp;
+using IdentityModel.Client;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace Activities.Mini.WxActivities
 {
@@ -23,13 +29,15 @@ namespace Activities.Mini.WxActivities
         private readonly IConfiguration _configuration;
         private readonly IDistributedCache<SessionUser> _cache;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IWeChatAppService _weChatAppService;
 
         public WxUserService(
             IConfiguration configuration,
             IDistributedCache<SessionUser> cache,
             IWxUserRepository wxUserRepository,
             IHttpClientFactory httpClientFactory,
-            IHttpContextAccessor httpContextAccessor
+            IHttpContextAccessor httpContextAccessor,
+            IWeChatAppService weChatAppService
             )
         {
             _cache = cache;
@@ -37,6 +45,7 @@ namespace Activities.Mini.WxActivities
             _httpClientFactory = httpClientFactory;
             _wxUserRepository = wxUserRepository;
             _httpContextAccessor = httpContextAccessor;
+            _weChatAppService = weChatAppService;
         }
 
         [HttpPost]
@@ -49,8 +58,8 @@ namespace Activities.Mini.WxActivities
             var secret = _configuration["MiniProgram:Secret"];
             var url = $"https://api.weixin.qq.com/sns/jscode2session?appid={appId}&secret={secret}&js_code={dto.Code}&grant_type=authorization_code";
             var result = await client.GetAsync<LoginResultDto>(url);
-
             var wxUser = await _wxUserRepository.FindByOpenIdAsync(result.openid);
+
             var sessionUser = new SessionUser()
             {
                 OpenId = result.openid,
@@ -72,12 +81,16 @@ namespace Activities.Mini.WxActivities
         [HttpPost]
         public async Task<IApiResult> RegisterAsync(WxUserRegisterDto dto)
         {
-            ArgumentNullException.ThrowIfNull(nameof(dto));
+            ArgumentNullException.ThrowIfNull(dto);
             var token = _httpContextAccessor.HttpContext.Request.Headers["token"];
             var sessionUser = await _cache.GetAsync(token);
-            ArgumentNullException.ThrowIfNull(nameof(sessionUser));
-            var wxUser = await _wxUserRepository.FindByOpenIdAsync(sessionUser.OpenId);
-            if(wxUser == null)
+            WxUser wxUser = null;
+            if (sessionUser != null)
+            {
+                wxUser = await _wxUserRepository.FindByOpenIdAsync(sessionUser.OpenId); 
+            }
+
+            if (wxUser == null)
             {
                 dto.MiniOpenId = sessionUser.OpenId;
                 wxUser = ObjectMapper.Map<WxUserRegisterDto, WxUser>(dto);
@@ -99,6 +112,62 @@ namespace Activities.Mini.WxActivities
             var wxUser = await _wxUserRepository.FindByOpenIdAsync(openId);
             await _wxUserRepository.DeleteAsync(wxUser);
             return ApiResult.Succeed("删除成功");
+        }
+
+        [HttpGet]
+        public async Task<IApiResult> GetUserPhoneAsync(string code)
+        {
+            var appId = _configuration["MiniProgram:AppId"];
+            var secret = _configuration["MiniProgram:Secret"];
+
+            var accessToken = await _weChatAppService.GetAccessToken(appId, secret);
+            var phone = await _weChatAppService.GetUserPhoneAsync(accessToken, code);
+
+            return ApiResult.Succeed(new { Phone = phone }, "注册成功");
+        }
+
+        [HttpGet]
+        public async Task<TokenResponse> GetAccessTokenAsync()
+        {
+            var client = new HttpClient();
+
+            var disco = await client.GetDiscoveryDocumentAsync(_configuration["AuthServer:Authority"]);
+
+            if (disco.IsError)
+            {
+                Console.WriteLine($"Disco error: {disco.Error}");
+                return null;
+            }
+
+            //Console.WriteLine($"Token endpoint: {disco.TokenEndpoint}");
+            Console.WriteLine();
+
+            //var authToken = await client.RequestAuthorizationCodeTokenAsync(new AuthorizationCodeTokenRequest()
+            //{
+            //    Address = disco.AuthorizeEndpoint,
+            //    ClientId = _configuration["AuthServer:SwaggerClientId"],
+            //    ClientSecret = _configuration["AuthServer:SwaggerClientSecret"]
+            //});
+
+            // TODO: Get secret from Azure Key Vault
+            // request token
+            var tokenResponse = await client.RequestPasswordTokenAsync(new PasswordTokenRequest
+            {
+                Address = disco.TokenEndpoint, // "https://localhost:5000/connect/token"
+                ClientId = _configuration["AuthServer:SwaggerClientId"], // valid clientid
+                ClientSecret = _configuration["AuthServer:SwaggerClientSecret"],
+                Scope = "Mini",
+                UserName = "zhaocy",
+                Password = "8$xwmrci@kxQMEY"
+            });
+
+            if (tokenResponse.IsError)
+            {
+                Console.WriteLine(tokenResponse.Error);
+                return null;
+            }
+
+            return tokenResponse;
         }
     }
 }

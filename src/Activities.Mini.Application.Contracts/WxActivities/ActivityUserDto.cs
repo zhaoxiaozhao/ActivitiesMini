@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Activities.Mini.Core.Converter;
+using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json.Serialization;
 using Volo.Abp.Application.Dtos;
 
 namespace Activities.Mini.WxActivities
@@ -9,6 +11,8 @@ namespace Activities.Mini.WxActivities
     {
         public long WxUserId { get; set; }
         public long ActivityId { get; set; }
+
+        [JsonConverter(typeof(CustomDateTimeConverter))]
         public DateTime AttendTime { get; set; }
     }
 }

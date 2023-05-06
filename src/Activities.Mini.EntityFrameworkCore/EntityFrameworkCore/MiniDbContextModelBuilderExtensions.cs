@@ -31,7 +31,7 @@ public static class MiniDbContextModelBuilderExtensions
             b.Property(x => x.EndTime).HasColumnName(nameof(Activity.EndTime));
             b.Property(x => x.Creator).HasColumnName(nameof(Activity.Creator));
 
-            b.HasMany(a => a.ActivityUsers).WithOne().HasForeignKey(x => x.ActivityId).IsRequired();
+            //b.HasMany(a => a.ActivityUsers).WithOne().HasForeignKey(x => x.ActivityId).IsRequired();
 
             b.HasIndex(x => new { x.Creator });
             b.HasIndex(x => new { x.Subject });
@@ -83,7 +83,9 @@ public static class MiniDbContextModelBuilderExtensions
             b.Property(x => x.UnionId).HasMaxLength(200).HasColumnName(nameof(WxUser.UnionId));
             b.Property(x => x.NickName).HasMaxLength(200).HasColumnName(nameof(WxUser.NickName));
             b.Property(x => x.RealName).HasMaxLength(200).HasColumnName(nameof(WxUser.RealName));
+            b.Property(x => x.Phone).HasMaxLength(11).HasColumnName(nameof(WxUser.Phone));
             b.Property(x => x.Gender).HasColumnName(nameof(WxUser.Gender));
+            b.Property(x => x.Phone).HasColumnName(nameof(WxUser.Phone));
             b.Property(x => x.Age).HasColumnName(nameof(WxUser.Age));
             b.Property(x => x.Year).HasColumnName(nameof(WxUser.Year));
             b.Property(x => x.Month).HasColumnName(nameof(WxUser.Month));

@@ -3,6 +3,7 @@ using System;
 using Activities.Mini.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volo.Abp.EntityFrameworkCore;
 
@@ -11,9 +12,10 @@ using Volo.Abp.EntityFrameworkCore;
 namespace Activities.Mini.Migrations
 {
     [DbContext(typeof(MiniDbContext))]
-    partial class MiniDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230506071325_Added_phone")]
+    partial class Added_phone
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -191,9 +193,7 @@ namespace Activities.Mini.Migrations
                         .HasColumnName("NickName");
 
                     b.Property<string>("Phone")
-                        .HasMaxLength(11)
-                        .HasColumnType("varchar(11)")
-                        .HasColumnName("Phone");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("RealName")
                         .HasMaxLength(200)

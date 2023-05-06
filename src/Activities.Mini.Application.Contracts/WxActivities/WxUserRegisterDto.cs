@@ -11,6 +11,7 @@ namespace Activities.Mini.WxActivities
         public string UnionId { get; set; }
         public string NickName { get; set; }
         public string RealName { get; set; }
+        public string Phone { get; set; }
         public int Gender { get; set; }
         public int Age { get; set; }
         public int Year { get; set; }

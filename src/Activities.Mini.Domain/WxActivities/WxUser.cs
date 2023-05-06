@@ -14,6 +14,7 @@ public class WxUser : AggregateRoot<long>
     public string UnionId { get; set; }
     public string NickName { get; set; }
     public string RealName { get; set; }
+    public string Phone { get; set; }
     public int Gender { get; set; }
     public int Age { get; set; }
     public int Year { get; set; }
@@ -26,10 +27,6 @@ public class WxUser : AggregateRoot<long>
     public WxUser(long id)
     {
         Id = id;
-    }
-    public override object[] GetKeys()
-    {
-        throw new NotImplementedException();
     }
 }
 

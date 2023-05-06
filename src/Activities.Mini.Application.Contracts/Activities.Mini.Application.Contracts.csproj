@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Activities.Mini.Common\Activities.Mini.Common.csproj" />
+    <ProjectReference Include="..\Activities.Mini.Core\Activities.Mini.Core.csproj" />
     <ProjectReference Include="..\Activities.Mini.Domain.Shared\Activities.Mini.Domain.Shared.csproj" />
   </ItemGroup>
 

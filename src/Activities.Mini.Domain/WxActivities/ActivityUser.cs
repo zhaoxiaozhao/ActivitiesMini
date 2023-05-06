@@ -19,8 +19,4 @@ public class ActivityUser : Entity<long>
         ActivityId = activityId;
         AttendTime = DateTime.Now;
     }
-    public override object[] GetKeys()
-    {
-        throw new NotImplementedException();
-    }
 }

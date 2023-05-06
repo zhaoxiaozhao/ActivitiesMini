@@ -13,9 +13,15 @@ namespace Activities.Mini.WxActivities
         public int Sort { get; set; }
         public int Type { get; set; }
         public string Value { get; set; }
-        public override object[] GetKeys()
+
+        public ActivityAppendix() { }
+
+        public ActivityAppendix(long activityId, int sort, int type, string value)
         {
-            throw new NotImplementedException();
+            ActivityId = activityId;
+            Sort = sort;
+            Type = type;
+            Value = value;
         }
     }
 }
