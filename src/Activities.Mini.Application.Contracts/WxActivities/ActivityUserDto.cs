@@ -11,7 +11,7 @@ namespace Activities.Mini.WxActivities
     {
         public long WxUserId { get; set; }
         public long ActivityId { get; set; }
-
+        public WxUserDto User { get; set; }
         [JsonConverter(typeof(CustomDateTimeConverter))]
         public DateTime AttendTime { get; set; }
     }

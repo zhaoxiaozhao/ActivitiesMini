@@ -7,7 +7,8 @@ using Volo.Abp.Domain.Repositories;
 
 namespace Activities.Mini.WxActivities
 {
-    public interface IActivityAppendixRepository : IRepository<ActivityAppendix, long>
+    public interface IAppendixRepository : IRepository<ActivityAppendix, long>
     {
+        Task<ActivityAppendix> FindByActivityIdAsync(long activityId);
     }
 }

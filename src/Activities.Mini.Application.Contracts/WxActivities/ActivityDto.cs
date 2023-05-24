@@ -9,6 +9,7 @@ namespace Activities.Mini.WxActivities
 {
     public class ActivityDto: EntityDto<long>
     {
+        public bool IsAttend { get; set; }
         public string CoverUrl { get; set; }
         public string Subject { get; set; }
         public string Content { get; set; }

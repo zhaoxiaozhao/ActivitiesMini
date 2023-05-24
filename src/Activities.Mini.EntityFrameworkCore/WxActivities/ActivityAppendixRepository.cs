@@ -1,4 +1,5 @@
 ﻿using Activities.Mini.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,16 @@ using Volo.Abp.EntityFrameworkCore;
 
 namespace Activities.Mini.WxActivities
 {
-    public class ActivityAppendixRepository : EfCoreRepository<MiniDbContext, ActivityAppendix, long>, IActivityAppendixRepository
+    public class AppendixRepository : EfCoreRepository<MiniDbContext, ActivityAppendix, long>, IAppendixRepository
     {
-        public ActivityAppendixRepository(IDbContextProvider<MiniDbContext> dbContextProvider) : base(dbContextProvider)
+        public AppendixRepository(IDbContextProvider<MiniDbContext> dbContextProvider) : base(dbContextProvider)
         {
+        }
+
+        public async Task<ActivityAppendix> FindByActivityIdAsync(long activityId)
+        {
+            var dbSet = await GetDbSetAsync();
+            return await dbSet.FirstOrDefaultAsync(u => u.ActivityId == activityId);
         }
     }
 }
