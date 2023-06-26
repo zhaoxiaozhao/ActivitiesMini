@@ -7,16 +7,17 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["src/Activities.Mini.HttpApi.Host/Activities.Mini.HttpApi.Host.csproj", "src/Activities.Mini.HttpApi.Host/"]
-COPY ["src/Activities.Mini.EntityFrameworkCore/Activities.Mini.EntityFrameworkCore.csproj", "src/Activities.Mini.EntityFrameworkCore/"]
-COPY ["src/Activities.Mini.Domain/Activities.Mini.Domain.csproj", "src/Activities.Mini.Domain/"]
-COPY ["src/Activities.Mini.Domain.Shared/Activities.Mini.Domain.Shared.csproj", "src/Activities.Mini.Domain.Shared/"]
-COPY ["src/Activities.Mini.Application/Activities.Mini.Application.csproj", "src/Activities.Mini.Application/"]
-COPY ["src/Activities.Mini.Application.Contracts/Activities.Mini.Application.Contracts.csproj", "src/Activities.Mini.Application.Contracts/"]
-COPY ["src/Activities.Mini.Common/Activities.Mini.Common.csproj", "src/Activities.Mini.Common/"]
-COPY ["src/Activities.Mini.Core/Activities.Mini.Core.csproj", "src/Activities.Mini.Core/"]
-COPY ["src/Activities.Mini.HttpApi/Activities.Mini.HttpApi.csproj", "src/Activities.Mini.HttpApi/"]
-RUN dotnet restore "src/Activities.Mini.HttpApi.Host/Activities.Mini.HttpApi.Host.csproj"
+COPY ["common.props", "."]
+COPY ["/src/Activities.Mini.HttpApi.Host/Activities.Mini.HttpApi.Host.csproj", "Activities.Mini.HttpApi.Host/"]
+COPY ["/src/Activities.Mini.EntityFrameworkCore/Activities.Mini.EntityFrameworkCore.csproj", "Activities.Mini.EntityFrameworkCore/"]
+COPY ["/src/Activities.Mini.Domain/Activities.Mini.Domain.csproj", "Activities.Mini.Domain/"]
+COPY ["/src/Activities.Mini.Domain.Shared/Activities.Mini.Domain.Shared.csproj", "Activities.Mini.Domain.Shared/"]
+COPY ["/src/Activities.Mini.Application/Activities.Mini.Application.csproj", "Activities.Mini.Application/"]
+COPY ["/src/Activities.Mini.Application.Contracts/Activities.Mini.Application.Contracts.csproj", "Activities.Mini.Application.Contracts/"]
+COPY ["/src/Activities.Mini.Common/Activities.Mini.Common.csproj", "Activities.Mini.Common/"]
+COPY ["/src/Activities.Mini.Core/Activities.Mini.Core.csproj", "Activities.Mini.Core/"]
+COPY ["/src/Activities.Mini.HttpApi/Activities.Mini.HttpApi.csproj", "Activities.Mini.HttpApi/"]
+RUN dotnet restore "Activities.Mini.HttpApi.Host/Activities.Mini.HttpApi.Host.csproj"
 COPY . .
 WORKDIR "/src/src/Activities.Mini.HttpApi.Host"
 RUN dotnet build "Activities.Mini.HttpApi.Host.csproj" -c Release -o /app/build

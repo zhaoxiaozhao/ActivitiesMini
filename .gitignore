@@ -263,3 +263,4 @@ src/Activities.Mini.Blazor.Server.Tiered/Logs/*
 
 # Use abp install-libs to restore.
 **/wwwroot/libs/*
+/src/Activities.Mini.HttpApi.Host/out

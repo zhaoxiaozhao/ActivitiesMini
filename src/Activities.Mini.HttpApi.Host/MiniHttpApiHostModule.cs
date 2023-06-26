@@ -67,21 +67,21 @@ public class MiniHttpApiHostModule : AbpModule
 
         if (hostingEnvironment.IsDevelopment())
         {
-            Configure<AbpVirtualFileSystemOptions>(options =>
-            {
-                options.FileSets.ReplaceEmbeddedByPhysical<MiniDomainSharedModule>(
-                    Path.Combine(hostingEnvironment.ContentRootPath,
-                        $"..{Path.DirectorySeparatorChar}Activities.Mini.Domain.Shared"));
-                options.FileSets.ReplaceEmbeddedByPhysical<MiniDomainModule>(
-                    Path.Combine(hostingEnvironment.ContentRootPath,
-                        $"..{Path.DirectorySeparatorChar}Activities.Mini.Domain"));
-                options.FileSets.ReplaceEmbeddedByPhysical<MiniApplicationContractsModule>(
-                    Path.Combine(hostingEnvironment.ContentRootPath,
-                        $"..{Path.DirectorySeparatorChar}Activities.Mini.Application.Contracts"));
-                options.FileSets.ReplaceEmbeddedByPhysical<MiniApplicationModule>(
-                    Path.Combine(hostingEnvironment.ContentRootPath,
-                        $"..{Path.DirectorySeparatorChar}Activities.Mini.Application"));
-            });
+            //Configure<AbpVirtualFileSystemOptions>(options =>
+            //{
+            //    options.FileSets.ReplaceEmbeddedByPhysical<MiniDomainSharedModule>(
+            //        Path.Combine(hostingEnvironment.ContentRootPath,
+            //            $"{Path.DirectorySeparatorChar}Activities.Mini.Domain.Shared"));
+            //    options.FileSets.ReplaceEmbeddedByPhysical<MiniDomainModule>(
+            //        Path.Combine(hostingEnvironment.ContentRootPath,
+            //            $"..{Path.DirectorySeparatorChar}Activities.Mini.Domain"));
+            //    options.FileSets.ReplaceEmbeddedByPhysical<MiniApplicationContractsModule>(
+            //        Path.Combine(hostingEnvironment.ContentRootPath,
+            //            $"..{Path.DirectorySeparatorChar}Activities.Mini.Application.Contracts"));
+            //    options.FileSets.ReplaceEmbeddedByPhysical<MiniApplicationModule>(
+            //        Path.Combine(hostingEnvironment.ContentRootPath,
+            //            $"..{Path.DirectorySeparatorChar}Activities.Mini.Application"));
+            //});
         }
     }
 
@@ -100,7 +100,7 @@ public class MiniHttpApiHostModule : AbpModule
             {
                 options.Authority = configuration["AuthServer:Authority"];
                 options.RequireHttpsMetadata = Convert.ToBoolean(configuration["AuthServer:RequireHttpsMetadata"]);
-                options.Audience = "Mini";
+                options.Audience = "Mini";  
             });
     }
 

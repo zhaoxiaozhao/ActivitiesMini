@@ -70,9 +70,12 @@ namespace Activities.Mini.WxActivities
             var cacheKey = (result.session_key + result.openid).GetSHA256Hash();
             await _cache.SetAsync(cacheKey, sessionUser, new DistributedCacheEntryOptions() { SlidingExpiration = TimeSpan.FromHours(2) });
 
+            var tokenResult = await GetAccessTokenAsync();
+
             return ApiResult.Succeed(new 
             { 
                 Token = cacheKey,
+                AccessToken = tokenResult?.AccessToken,
                 UserInfo = wxUser,
                 IsRegister = sessionUser.WxUserId > 0
             });
@@ -127,9 +130,16 @@ namespace Activities.Mini.WxActivities
         }
 
         [HttpGet]
-        public async Task<TokenResponse> GetAccessTokenAsync()
+        public async  Task<IApiResult> GetTokenAsync()
         {
-            var client = new HttpClient();
+            var token = await GetAccessTokenAsync();
+
+            return ApiResult.Succeed(token);
+        }
+
+        private async Task<TokenResponse> GetAccessTokenAsync()
+        {
+            var client = _httpClientFactory.CreateClient();
 
             var disco = await client.GetDiscoveryDocumentAsync(_configuration["AuthServer:Authority"]);
 
@@ -139,26 +149,16 @@ namespace Activities.Mini.WxActivities
                 return null;
             }
 
-            //Console.WriteLine($"Token endpoint: {disco.TokenEndpoint}");
-            Console.WriteLine();
-
-            //var authToken = await client.RequestAuthorizationCodeTokenAsync(new AuthorizationCodeTokenRequest()
-            //{
-            //    Address = disco.AuthorizeEndpoint,
-            //    ClientId = _configuration["AuthServer:SwaggerClientId"],
-            //    ClientSecret = _configuration["AuthServer:SwaggerClientSecret"]
-            //});
-
             // TODO: Get secret from Azure Key Vault
             // request token
             var tokenResponse = await client.RequestPasswordTokenAsync(new PasswordTokenRequest
             {
-                Address = disco.TokenEndpoint, // "https://localhost:5000/connect/token"
-                ClientId = _configuration["AuthServer:SwaggerClientId"], // valid clientid
+                Address = disco.TokenEndpoint,
+                ClientId = _configuration["AuthServer:SwaggerClientId"],
                 ClientSecret = _configuration["AuthServer:SwaggerClientSecret"],
                 Scope = "Mini",
                 UserName = "zhaocy",
-                Password = "8$xwmrci@kxQMEY"
+                Password = "@Saber22" 
             });
 
             if (tokenResponse.IsError)

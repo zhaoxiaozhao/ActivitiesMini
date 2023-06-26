@@ -12,6 +12,7 @@ using Volo.Abp.Caching;
 using Volo.Abp.ObjectMapping;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
+using Volo.Abp.BlobStoring.Aliyun;
 
 namespace Activities.Mini;
 
@@ -46,11 +47,28 @@ public class MiniApplicationModule : AbpModule
 
         Configure<AbpBlobStoringOptions>(options =>
         {
-            options.Containers.Configure("profile-pictures", container =>
+            //options.Containers.Configure("profile-pictures", container =>
+            //{
+            //    //container.UseFileSystem(fileSystem =>
+            //    //{
+            //    //    fileSystem.BasePath = "D:\\my-files";
+            //    //});
+            //});
+
+            options.Containers.ConfigureDefault(container =>
             {
-                container.UseFileSystem(fileSystem =>
+                container.UseAliyun(aliyun =>
                 {
-                    fileSystem.BasePath = "D:\\my-files";
+                    aliyun.AccessKeyId = "LTAI5tHkL4Ed7Cy4aMszkUDi";
+                    aliyun.AccessKeySecret = "5OpQfTGWQa0M7aUTNwTP3MMIpfCHPu";
+                    aliyun.Endpoint = "activitybucket01.oss-cn-chengdu.aliyuncs.com";
+                    aliyun.RegionId = "cn-chengdu";
+                    aliyun.RoleArn = "acs:ram::1765183228334452:role/aliyunossrole";
+                    aliyun.RoleSessionName = "the name of the certificate";
+                    aliyun.Policy = "{\r\n    \"Statement\": [\r\n        {\r\n            \"Action\": \"oss:*\",\r\n            \"Effect\": \"Allow\",\r\n            \"Resource\": \"*\"\r\n        }\r\n    ],\r\n    \"Version\": \"1\"\r\n}";
+                    aliyun.DurationSeconds = 900;
+                    aliyun.ContainerName = "activitybucket01";
+                    aliyun.CreateContainerIfNotExists = true;
                 });
             });
         });

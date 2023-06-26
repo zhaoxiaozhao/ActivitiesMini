@@ -16,10 +16,12 @@ using static Volo.Abp.Identity.Settings.IdentitySettingNames;
 using Microsoft.AspNetCore.Http;
 using Activities.Mini.Core.Session;
 using Volo.Abp.Caching;
+using Activities.Mini.Core.Extensions;
 
 namespace Activities.Mini.WxActivities
 {
     [AllowAnonymous]
+    [AuthLoginAttribute]
     public class ActivityService : 
         CrudAppService<
             Activity,
