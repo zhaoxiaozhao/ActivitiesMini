@@ -7,11 +7,12 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["src/Activities.Mini.IdentityServer/Activities.Mini.IdentityServer.csproj", "src/Activities.Mini.IdentityServer/"]
-COPY ["src/Activities.Mini.EntityFrameworkCore/Activities.Mini.EntityFrameworkCore.csproj", "src/Activities.Mini.EntityFrameworkCore/"]
-COPY ["src/Activities.Mini.Domain/Activities.Mini.Domain.csproj", "src/Activities.Mini.Domain/"]
-COPY ["src/Activities.Mini.Domain.Shared/Activities.Mini.Domain.Shared.csproj", "src/Activities.Mini.Domain.Shared/"]
-RUN dotnet restore "src/Activities.Mini.IdentityServer/Activities.Mini.IdentityServer.csproj"
+COPY ["common.props", "."]
+COPY ["/src/Activities.Mini.IdentityServer/Activities.Mini.IdentityServer.csproj", "Activities.Mini.IdentityServer/"]
+COPY ["/src/Activities.Mini.EntityFrameworkCore/Activities.Mini.EntityFrameworkCore.csproj", "Activities.Mini.EntityFrameworkCore/"]
+COPY ["/src/Activities.Mini.Domain/Activities.Mini.Domain.csproj", "src/Activities.Mini.Domain/"]
+COPY ["/src/Activities.Mini.Domain.Shared/Activities.Mini.Domain.Shared.csproj", "Activities.Mini.Domain.Shared/"]
+RUN dotnet restore "Activities.Mini.IdentityServer/Activities.Mini.IdentityServer.csproj"
 COPY . .
 WORKDIR "/src/src/Activities.Mini.IdentityServer"
 RUN dotnet build "Activities.Mini.IdentityServer.csproj" -c Release -o /app/build

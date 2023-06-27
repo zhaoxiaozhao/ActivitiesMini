@@ -59,8 +59,8 @@ public class MiniApplicationModule : AbpModule
             {
                 container.UseAliyun(aliyun =>
                 {
-                    aliyun.AccessKeyId = "LTAI5tHkL4Ed7Cy4aMszkUDi";
-                    aliyun.AccessKeySecret = "5OpQfTGWQa0M7aUTNwTP3MMIpfCHPu";
+                    aliyun.AccessKeyId = "";
+                    aliyun.AccessKeySecret = "";
                     aliyun.Endpoint = "activitybucket01.oss-cn-chengdu.aliyuncs.com";
                     aliyun.RegionId = "cn-chengdu";
                     aliyun.RoleArn = "acs:ram::1765183228334452:role/aliyunossrole";
