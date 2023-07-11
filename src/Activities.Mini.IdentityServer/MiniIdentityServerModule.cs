@@ -99,11 +99,15 @@ public class MiniIdentityServerModule : AbpModule
 
         if (hostingEnvironment.IsDevelopment())
         {
-            //Configure<AbpVirtualFileSystemOptions>(options =>
-            //{
-            //    options.FileSets.ReplaceEmbeddedByPhysical<MiniDomainSharedModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}Activities.Mini.Domain.Shared"));
-            //    options.FileSets.ReplaceEmbeddedByPhysical<MiniDomainModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}Activities.Mini.Domain"));
-            //});
+            Configure<AbpVirtualFileSystemOptions>(options =>
+            {
+                options.FileSets.AddEmbedded<MiniIdentityServerModule>(
+                    baseNamespace: "Activities.Mini.IdentityServer.wwwroot",
+                    baseFolder: "/wwwroot"
+                );
+                //options.FileSets.ReplaceEmbeddedByPhysical<MiniDomainSharedModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}Activities.Mini.Domain.Shared"));
+                //options.FileSets.ReplaceEmbeddedByPhysical<MiniDomainModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}Activities.Mini.Domain"));
+            });
         }
 
         Configure<AppUrlOptions>(options =>

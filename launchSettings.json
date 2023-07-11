@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Docker Compose": {
+      "commandName": "DockerCompose",
+      "commandVersion": "1.0",
+      "serviceActions": {
+        "activities.mini.identityserver": "StartDebugging",
+        "activities.mini.httpapi.host": "StartDebugging"
+      }
+    }
+  }
+}

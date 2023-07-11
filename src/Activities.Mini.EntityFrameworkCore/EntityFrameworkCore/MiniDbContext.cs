@@ -56,6 +56,8 @@ public class MiniDbContext :
     public DbSet<ActivityAppendix> ActivityAppendices { get; set; }
     public DbSet<WxUser> WxUsers { get; set; }
 
+    public DbSet<IdentityUserDelegation> UserDelegations => throw new System.NotImplementedException();
+
 
     #endregion
 

@@ -41,7 +41,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Activities.Mini.DbMigrator"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Activities.Mini.Core", "src\Activities.Mini.Core\Activities.Mini.Core.csproj", "{A667E792-93A9-45CA-B287-A552A1678456}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Activities.Mini.Common", "src\Activities.Mini.Common\Activities.Mini.Common.csproj", "{643C2B83-335E-4118-BAB6-309C7BB01662}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Activities.Mini.Common", "src\Activities.Mini.Common\Activities.Mini.Common.csproj", "{643C2B83-335E-4118-BAB6-309C7BB01662}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{E3104B25-C1E2-4CFB-AD79-67A7DF03308A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -121,6 +123,10 @@ Global
 		{643C2B83-335E-4118-BAB6-309C7BB01662}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{643C2B83-335E-4118-BAB6-309C7BB01662}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{643C2B83-335E-4118-BAB6-309C7BB01662}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3104B25-C1E2-4CFB-AD79-67A7DF03308A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3104B25-C1E2-4CFB-AD79-67A7DF03308A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3104B25-C1E2-4CFB-AD79-67A7DF03308A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3104B25-C1E2-4CFB-AD79-67A7DF03308A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
